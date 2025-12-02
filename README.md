@@ -201,91 +201,91 @@ PUT /fuels/1
 ### GET /clients — список
 
 <p align="center">
-  <img src="./images/Clients/List.png" width="1200" alt="NPM test results">
+  <img src="./Images/Clients/List.png" width="1200" alt="NPM test results">
 </p>
 
 ### POST /clients — створення
 
 <p align="center">
-  <img src="./images/Clients/Create.png" width="1200" alt="NPM test results">
+  <img src="./Images/Clients/Create.png" width="1200" alt="NPM test results">
 </p>
 
 ### GET /clients/:id— спиcок по ID
 
 <p align="center">
-  <img src="./images/Clients/ID.png" width="1200" alt="NPM test results">
+  <img src="./Images/Clients/ID.png" width="1200" alt="NPM test results">
 </p>
 
 ### PUT /clients/:id — оновлення
 
 <p align="center">
-  <img src="./images/Clients/Update.png" width="1200" alt="NPM test results">
+  <img src="./Images/Clients/Update.png" width="1200" alt="NPM test results">
 </p>
 
 ### DELETE /clients/:id — видалення
 
 <p align="center">
-  <img src="./images/Clients/Delete.png" width="1200" alt="NPM test results">
+  <img src="./Images/Clients/Delete.png" width="1200" alt="NPM test results">
 </p>
 
 ### GET /operators — список
 
 <p align="center"> 
- <img src="./images/Operator/List.png" width="1200" alt="operators list"> 
+ <img src="./Images/Operator/List.png" width="1200" alt="operators list"> 
 </p>
 
 ### POST /operators — створення
 
 <p align="center"> 
- <img src="./images/Operator/Create.png" width="1200" alt="operators list"> 
+ <img src="./Images/Operator/Create.png" width="1200" alt="operators list"> 
 </p>
 
 ### GET /operators/:id — отримання по ID
 
 <p align="center"> 
- <img src="./images/Operator/ID.png" width="1200" alt="operators list"> 
+ <img src="./Images/Operator/ID.png" width="1200" alt="operators list"> 
 </p>
 
 ### PUT /operators/:id — оновлення
 
 <p align="center"> 
- <img src="./images/Operator/Update.png" width="1200" alt="operators list"> 
+ <img src="./Images/Operator/Update.png" width="1200" alt="operators list"> 
 </p>
 
 ### DELETE /operators/:id — видалення
 
 <p align="center"> 
- <img src="./images/Operator/Delete.png" width="1200" alt="operators list"> 
+ <img src="./Images/Operator/Delete.png" width="1200" alt="operators list"> 
 </p>
 
 ### GET /fuels — список
 
 <p align="center"> 
- <img src="./images/Fuel/List.png" width="1200" alt="operators list"> 
+ <img src="./Images/Fuel/List.png" width="1200" alt="operators list"> 
 </p>
 
 ### POST /fuels — створення
 
 <p align="center"> 
- <img src="./images/Fuel/Create.png" width="1200" alt="operators list"> 
+ <img src="./Images/Fuel/Create.png" width="1200" alt="operators list"> 
 </p>
 
 ### GET /fuels/:id — отримання по ID
 
 <p align="center"> 
- <img src="./images/Fuel/ID.png" width="1200" alt="operators list"> 
+ <img src="./Images/Fuel/ID.png" width="1200" alt="operators list"> 
 </p>
 
 ### PUT /fuels/:id — оновлення
 
 <p align="center"> 
- <img src="./images/Fuel/Update.png" width="1200" alt="operators list"> 
+ <img src="./Images/Fuel/Update.png" width="1200" alt="operators list"> 
 </p>
 
 ### DELETE /fuels/:id — видалення
 
 <p align="center"> 
- <img src="./images/Fuel/Delete.png" width="1200" alt="operators list"> 
+ <img src="./Images/Fuel/Delete.png" width="1200" alt="operators list"> 
 </p>
 
 # 📌 Висновок
