@@ -1,83 +1,297 @@
-#  TypeORM / Express / TypeScript RESTful API boilerplate
+# 🛢️ REST API для мережі АЗС — Workshop 5
 
-[![CI][build-badge]][build-url]
-[![TypeScript][typescript-badge]][typescript-url]
-[![prettier][prettier-badge]][prettier-url]
-![Heisenberg](misc/heisenberg.png)
+## Автор: Погоня Андрій ІПЗ‑3.03
 
-Boilerplate with focus on best practices and painless developer experience:
+## 📌 Опис проєкту
 
-- Minimal setup that can be extended 🔧
-- Spin it up with single command 🌀
-- TypeScript first
-- RESTful APIs
-- JWT authentication with role based authorization
+Проєкт реалізує серверну частину АЗС на базі **Express + TypeORM + PostgreSQL**.
+Передбачає CRUD API для основних сутностей, контейнеризацію через **Docker**, використання **міграцій** та тестування через **Postman**.
 
-## Requirements
+---
 
-- [Node v16+](https://nodejs.org/)
-- [Docker](https://www.docker.com/)
+📁 Структура файлів
 
-## Running
+```
+src/
+ ├── controllers/
+ │   ├── Client/
+ │   ├── Operator/
+ │   ├── Fuel/
+ ├── orm/
+ │   ├── entities/
+ │   │   ├── Client/
+ │   │   ├── Operator/
+ │   │   ├── Fuel/
+ │   ├── migrations/
+ │   ├── config/
+ ├── routes/
+ │   ├── client.routes.ts
+ │   ├── fuel.routes.ts
+ │   ├── operator.routes.ts
+ │   ├── index.ts
+ ├── index.ts
+```
 
-_Easily set up a local development environment with single command!_
+🐳 Docker запуск
 
-- clone the repo
-- `npm run docker:dev` 🚀
+🔥 Development
 
-Visit [localhost:4000](http://localhost:4000/) or if using Postman grab [config](/postman).
+```bash
+npm run docker:dev
+```
 
-### _What happened_ 💥
+Сервер і база піднімаються автоматично.
 
-Containers created:
+🛢️ Міграції
+🔧 Створення
 
-- Postgres database container seeded with 💊 Breaking Bad characters in `Users` table (default credentials `user=walter`, `password=white` in [.env file](./.env))
-- Node (v16 Alpine) container with running boilerplate RESTful API service
-- and one Node container instance to run tests locally or in CI
+```bash
+npm run migration:generate -- -n NAME
+```
 
-## Features:
+▶️ Виконання
 
-- [Express](https://github.com/expressjs/express) framework
-- [TypeScript v4](https://github.com/microsoft/TypeScript) codebase
-- [TypeORM](https://typeorm.io/) using Data Mapper pattern
-- [Docker](https://www.docker.com/) environment:
-  - Easily start local development using [Docker Compose](https://docs.docker.com/compose/) with single command `npm run docker:dev`
-  - Connect to different staging or production environments `npm run docker:[stage|prod]`
-  - Ready for **microservices** development and deployment.  
-    Once API changes are made, just build and push new docker image with your favourite CI/CD tool  
-    `docker build -t <username>/api-boilerplate:latest .`  
-    `docker push <username>/api-boilerplate:latest`
-  - Run unit, integration (or setup with your frontend E2E) tests as `docker exec -ti be_boilerplate_test sh` and `npm run test`
-- Contract first REST API design:
-  - never break API again with HTTP responses and requests payloads using [type definitions](./src/types/express/index.d.ts)
-  - Consistent schema error [response](./src/utils/response/custom-error/types.ts). Your frontend will always know how to handle errors thrown in `try...catch` statements 💪
-- JWT authentication and role based authorization using custom middleware
-- Set local, stage or production [environmental variables](./config) with [type definitions](./src/types/ProcessEnv.d.ts)
-- Logging with [morgan](https://github.com/expressjs/morgan)
-- Unit and integration tests with [Mocha](https://mochajs.org/) and [Chai](https://www.chaijs.com/)
-- Linting with [ESLint](https://eslint.org/)
-- [Prettier](https://prettier.io/) code formatter
-- Git hooks with [Husky](https://github.com/typicode/husky) and [lint-staged](https://github.com/okonet/lint-staged)
-- Automated npm & Docker dependency updates with [Renovate](https://github.com/renovatebot/renovate) (set to patch version only)
-- Commit messages must meet [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) format.  
-  After staging changes just run `npm run commit` and get instant feedback on your commit message formatting and be prompted for required fields by [Commitizen](https://github.com/commitizen/cz-cli)
+```bash
+npm run migration:run
+```
 
-## Other awesome boilerplates:
+🧨 Відкат
 
-Each boilerplate comes with it's own flavor of libraries and setup, check out others:
+```bash
+npm run migration:revert
+```
 
-- [Express and TypeORM with TypeScript](https://github.com/typeorm/typescript-express-example)
-- [Node.js, Express.js & TypeScript Boilerplate for Web Apps](https://github.com/jverhoelen/node-express-typescript-boilerplate)
-- [Express boilerplate for building RESTful APIs](https://github.com/danielfsousa/express-rest-es2017-boilerplate)
-- [A delightful way to building a RESTful API with NodeJs & TypeScript by @w3tecch](https://github.com/w3tecch/express-typescript-boilerplate)
+## 🧱 Реалізовані сутності та зв’язки
 
-[build-badge]: https://github.com/mkosir/express-typescript-typeorm-boilerplate/actions/workflows/main.yml/badge.svg
-[build-url]: https://github.com/mkosir/express-typescript-typeorm-boilerplate/actions/workflows/main.yml
-[typescript-badge]: https://badges.frapsoft.com/typescript/code/typescript.svg?v=101
-[typescript-url]: https://github.com/microsoft/TypeScript
-[prettier-badge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg
-[prettier-url]: https://github.com/prettier/prettier
+### 👤 Client
 
-## Contributing
+📌 Зберігає інформацію про клієнтів АЗС.
 
-All contributions are welcome!
+**Поля:**
+
+- `client_id`: Primary Key
+- `first_name`: string
+- `last_name`: string
+- `phone_number`: string | null
+
+**Зв’язки:**
+
+- 1 : N → Fueling
+- 1 : N → ShopSales
+- 1 : N → Finance
+
+---
+
+### 👷 Operator
+
+📌 Працівник АЗС. Має роль.
+
+**Поля:**
+
+- `operator_id`
+- `first_name`
+- `last_name`
+- `username` — Унікальний
+- `password`
+- `role`: enum(ADMIN | OPERATOR)
+- `shift_number`
+- `created_at`
+- `gasstation`: FK
+
+**Зв’язки:**
+
+- 1 : N → Fueling
+- 1 : N → ShopSales
+- 1 : N → OperatorLog
+
+---
+
+### ⛽ Fuel
+
+📌 Тип пального.
+
+**Поля:**
+
+- `fuel_id`
+- `fuel_name`
+- `price`
+
+**Зв’язки:**
+
+- 1 : N → Fueling
+- 1 : N → FuelMinPrice
+- 1 : N → Supply
+
+---
+
+## 🌐 API ендпоінти
+
+### 📍 Client routes
+
+| Метод  | Ендпоінт       | Опис           |
+| ------ | -------------- | -------------- |
+| GET    | `/clients`     | Отримати всіх  |
+| GET    | `/clients/:id` | Отримати по ID |
+| POST   | `/clients`     | Створити       |
+| PUT    | `/clients/:id` | Оновити        |
+| DELETE | `/clients/:id` | Видалити       |
+
+---
+
+### 📍 Operator routes
+
+| Метод  | Ендпоінт         | Опис           |
+| ------ | ---------------- | -------------- |
+| GET    | `/operators`     | Отримати всіх  |
+| GET    | `/operators/:id` | Отримати по ID |
+| POST   | `/operators`     | Створити       |
+| PUT    | `/operators/:id` | Оновити        |
+| DELETE | `/operators/:id` | Видалити       |
+
+---
+
+### 📍 Fuel routes
+
+| Метод  | Ендпоінт     | Опис           |
+| ------ | ------------ | -------------- |
+| GET    | `/fuels`     | Отримати всі   |
+| GET    | `/fuels/:id` | Отримати по ID |
+| POST   | `/fuels`     | Створити       |
+| PUT    | `/fuels/:id` | Оновити        |
+| DELETE | `/fuels/:id` | Видалити       |
+
+---
+
+## 🧪 Приклади запитів (Postman)
+
+### 🔹 Створення клієнта
+
+```http
+POST /clients
+Content-Type: application/json
+
+{
+  "first_name": "Walter",
+  "last_name": "White",
+  "phone_number": "+380501112233"
+}
+```
+
+🔹 Створення пального
+
+```http
+POST /fuels
+{
+  "fuel_name": "Diesel",
+  "price": 51.99
+}
+```
+
+🔹 Оновлення пального
+
+```http
+PUT /fuels/1
+{
+  "price": 48.75
+}
+```
+
+## 📷 Скріншоти Postman:
+
+### GET /clients — список
+
+<p align="center">
+  <img src="./images/Clients/Снимок экрана 2025-12-02 003550.png" width="1200" alt="NPM test results">
+</p>
+
+### POST /clients — створення
+
+<p align="center">
+  <img src="./images/Clients/Снимок экрана 2025-12-02 003751.png" width="1200" alt="NPM test results">
+</p>
+
+### GET /clients/:id— спиcок по ID
+
+<p align="center">
+  <img src="./images/Clients/Снимок экрана 2025-12-02 003745.png" width="1200" alt="NPM test results">
+</p>
+
+### PUT /clients/:id — оновлення
+
+<p align="center">
+  <img src="./images/Clients/Снимок экрана 2025-12-02 003846.png" width="1200" alt="NPM test results">
+</p>
+
+### DELETE /clients/:id — видалення
+
+<p align="center">
+  <img src="./images/Clients/Снимок экрана 2025-12-02 003906.png" width="1200" alt="NPM test results">
+</p>
+
+### GET /operators — список
+
+<p align="center"> 
+ <img src="./images/Operator/Снимок экрана 2025-12-02 010251.png" width="1200" alt="operators list"> 
+</p>
+
+### POST /operators — створення
+
+<p align="center"> 
+ <img src="./images/Operator/Снимок экрана 2025-12-02 010331.png" width="1200" alt="operators list"> 
+</p>
+
+### GET /operators/:id — отримання по ID
+
+<p align="center"> 
+ <img src="./images/Operator/Снимок экрана 2025-12-02 010302.png" width="1200" alt="operators list"> 
+</p>
+
+### PUT /operators/:id — оновлення
+
+<p align="center"> 
+ <img src="./images/Operator/Снимок экрана 2025-12-02 010505.png" width="1200" alt="operators list"> 
+</p>
+
+### DELETE /operators/:id — видалення
+
+<p align="center"> 
+ <img src="./images/Operator/Снимок экрана 2025-12-02 010530.png" width="1200" alt="operators list"> 
+</p>
+
+### GET /fuels — список
+
+<p align="center"> 
+ <img src="./images/Fuel/Снимок экрана 2025-12-02 010758.png" width="1200" alt="operators list"> 
+</p>
+
+### POST /fuels — створення
+
+<p align="center"> 
+ <img src="./images/Fuel/Снимок экрана 2025-12-02 010747.png" width="1200" alt="operators list"> 
+</p>
+
+### GET /fuels/:id — отримання по ID
+
+<p align="center"> 
+ <img src="./images/Fuel/Снимок экрана 2025-12-02 010807.png" width="1200" alt="operators list"> 
+</p>
+
+### PUT /fuels/:id — оновлення
+
+<p align="center"> 
+ <img src="./images/Fuel/Снимок экрана 2025-12-02 010818.png" width="1200" alt="operators list"> 
+</p>
+
+### DELETE /fuels/:id — видалення
+
+<p align="center"> 
+ <img src="./images/Fuel/Снимок экрана 2025-12-02 010829.png" width="1200" alt="operators list"> 
+</p>
+
+# 📌 Висновок
+
+У рамках виконання лабораторної роботи було розроблено повноцінний серверний застосунок для інформаційної системи мережі АЗС. Проєкт побудовано з використанням сучасних технологій — Node.js, Express, TypeScript та TypeORM, що дозволило створити масштабовану архітектуру з чітким розподілом бізнес-логіки, роутів та доступу до бази даних.
+База даних реалізована на PostgreSQL, що забезпечує високий рівень надійності, транзакційності та підтримки складних зв’язків між сутностями. Усі таблиці побудовані з використанням GENERATED ALWAYS AS IDENTITY, що відповідає сучасним практикам замість застарілого типу SERIAL.
+Сутності Client, Operator та Fuel реалізовані відповідно до вимог предметної області. Для кожної сутності створено моделі, контролери, роутери та сервісні методи, що забезпечують чисту та підтримувану структуру коду.
+Для кожної сутності реалізовано CRUD-ендпоінти, що включають операції створення, отримання, оновлення та видалення. Усі маршрути протестовані через Postman, а результати запитів задокументовані у вигляді скріншотів, що відображають коректність роботи API.
+В результаті виконання роботи створено готову до розширення частину бекенд-системи, яка може бути масштабована новими сутностями, модулями, сервісами та функціональністю. Система може бути використана як основа для майбутньої курсової роботи або реального застосунку мережі АЗС.

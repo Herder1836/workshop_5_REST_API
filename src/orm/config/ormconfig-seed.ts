@@ -4,7 +4,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 const configSeed: ConnectionOptions = {
   type: 'postgres',
   host: process.env.PG_HOST,
-  port: Number(process.env.PG_PORT),
+  port: 5432,
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,

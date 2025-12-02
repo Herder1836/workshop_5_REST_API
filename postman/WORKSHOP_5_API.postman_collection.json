@@ -1,0 +1,159 @@
+{
+  "info": {
+    "_postman_id": "c5b7317d-8c0c-4e87-a273-dbcc9a873c93",
+    "name": "WORKSHOP_5_API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Client",
+      "item": [
+        {
+          "name": "GET ALL Clients",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/client"
+          }
+        },
+        {
+          "name": "GET Client by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/client/1"
+          }
+        },
+        {
+          "name": "CREATE Client",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"Walter\",\n  \"last_name\": \"White\",\n  \"phone_number\": \"+380501112233\"\n}"
+            },
+            "url": "{{base_url}}/client"
+          }
+        },
+        {
+          "name": "UPDATE Client",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone_number\": \"+380991234567\"\n}"
+            },
+            "url": "{{base_url}}/client/1"
+          }
+        },
+        {
+          "name": "DELETE Client",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/client/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Operator",
+      "item": [
+        {
+          "name": "GET ALL Operators",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/operator"
+          }
+        },
+        {
+          "name": "GET Operator by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/operator/1"
+          }
+        },
+        {
+          "name": "CREATE Operator",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"Jesse\",\n  \"last_name\": \"Pinkman\",\n  \"shift_number\": 1,\n  \"username\": \"jesse\",\n  \"password\": \"pass1\",\n  \"role\": \"OPERATOR\"\n}"
+            },
+            "url": "{{base_url}}/operator"
+          }
+        },
+        {
+          "name": "UPDATE Operator",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shift_number\": 2\n}"
+            },
+            "url": "{{base_url}}/operator/1"
+          }
+        },
+        {
+          "name": "DELETE Operator",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/operator/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fuel",
+      "item": [
+        {
+          "name": "GET ALL Fuel",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/fuel"
+          }
+        },
+        {
+          "name": "GET Fuel by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/fuel/1"
+          }
+        },
+        {
+          "name": "CREATE Fuel",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fuel_name\": \"Diesel\",\n  \"price\": 51.99\n}"
+            },
+            "url": "{{base_url}}/fuel"
+          }
+        },
+        {
+          "name": "UPDATE Fuel",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": 48.75\n}"
+            },
+            "url": "{{base_url}}/fuel/1"
+          }
+        },
+        {
+          "name": "DELETE Fuel",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/fuel/1"
+          }
+        }
+      ]
+    }
+  ]
+}

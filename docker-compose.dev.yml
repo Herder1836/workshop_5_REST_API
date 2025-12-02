@@ -6,16 +6,19 @@ services:
     env_file:
       - .env
     ports:
-      - '6432:5432'
+      - '7432:5432'
     volumes:
       - ./database/boilerplate:/var/lib/postgresql/data/
 
   be_boilerplate:
-    entrypoint: /bin/sh './scripts/be-node-dev.sh'
+    entrypoint:
+      /bin/sh './scripts/be-node-dev.sh'
+      #- bash
+      #- /app/scripts/be-node-dev.sh
     env_file:
       - .env
     ports:
-      - '4000:4000'
+      - '5000:4000'
     depends_on:
       - db_postgres
     links:
